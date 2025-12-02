@@ -17,6 +17,7 @@ void mpi_io_reading(const char *filename){
 
     double *local_data = NULL;
 
+    // Get rank and size
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
@@ -59,8 +60,12 @@ void mpi_io_reading(const char *filename){
     // 8. Close
     MPI_File_close(&file);
 
+    // The helper function prints a short preview of the local data
+    // and the total number of elements on this rank.
     print_vector(local_data, (int)my_count, rank);
 
+    // This block verifies that the data is sequential and matches
+    // the expected pattern (0, 1, 2, ...).
     MPI_Offset start;
     if (rank < remainder)
         start = rank * (base + 1);
@@ -107,26 +112,45 @@ int tutorial_main(int argc, char **argv){
     int rank;
     const char *filename = "input.bin";
 
+    // 1. Initialize MPI
+    //   Use MPI_Init(&argc, &argv)
+    //   Then get rank using MPI_Comm_rank
+
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
+    // 2. (Optional but recommended) Read filename from command line
+    //   If argc > 1, set filename = argv[1]
     if (argc > 1)
         filename = argv[1];
 
+    // 3. Print header from rank 0 (optional)
+    //   Example: "MPI I/O Tutorial: Parallel Reading"
     if (rank == 0)
-        printf("MPI I/O Tutorial\n\n");
+        printf("MPI I/O Tutorial: Parallel Reading\n\n");
+
+    // 4. Time your method
+    //   - Call MPI_Wtime() before mpi_io_reading
+    //   - Call MPI_Wtime() after
+    //   - Compute local elapsed = end - start
 
     double t_start = MPI_Wtime();
     mpi_io_reading(filename);
     double t_end = MPI_Wtime();
 
     double elapsed = t_end - t_start;
-    double max_elapsed;
 
+    // 5. Compute maximum elapsed time across ranks
+    //  - Use MPI_Reduce with MPI_MAX
+    double max_elapsed;
     MPI_Reduce(&elapsed, &max_elapsed, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
+    
+    // 6. Print timing result from rank 0
     if (rank == 0)
         printf("\nTime: %f seconds\n", max_elapsed);
 
+    // 7. Finalize MPI
+    //   Use MPI_Finalize()
     MPI_Finalize();
     return 0;
 }
