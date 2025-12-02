@@ -15,6 +15,6 @@ foreach(src ${TEST_SOURCES})
 endforeach()
 
 set_tests_properties(test_reading_Test
-                     test_reading_offsets_Test
+                     test_reading_remainder_Test
                      test_reading_continuosly_Test
                      PROPERTIES LABELS "mpi_io_reading")
