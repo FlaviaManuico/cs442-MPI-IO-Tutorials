@@ -6,9 +6,7 @@
 
 #define TOTAL_VALUES 1024
 
-int writing_main(char *filename) {
-    
-    MPI_Init(&argc, &argv);
+void mpi_io_writing(const char *filename) {
     
     int rank, size;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -43,8 +41,24 @@ int writing_main(char *filename) {
 
     // Free local memory.
 
-    
-    MPI_Finalize();
+}
 
+int writing_main(int argc, char **argv){
+    int rank;
+    const char *filename = "output.bin";
+
+    // Initialize MPI
+
+    // Get the rank using MPI_Comm_rank
+
+    // (Optional but recommended) Read filename from command line
+    //   If argc > 1, set filename = argv[1]
+    if (argc > 1)
+        filename = argv[1];
+
+    mpi_io_writing(filename);
+
+    // Finalize MPI
+    
     return 0;
 }

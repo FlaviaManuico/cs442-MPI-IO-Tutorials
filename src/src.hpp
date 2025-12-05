@@ -18,9 +18,11 @@ int MPI_Init(int *argc, char ***argv);
 int MPI_Finalize();
 
 int tutorial_main(int argc, char **argv);
+int writing_main(int argc, char **argv);
 void print_vector(const double *data, int count, int rank);
 int verify_sequential_data(const double *data, int count, double expected_start);
 void mpi_io_reading(const char *filename);
+void mpi_io_writing(const char *filename);
 
 #ifdef __cplusplus
 }

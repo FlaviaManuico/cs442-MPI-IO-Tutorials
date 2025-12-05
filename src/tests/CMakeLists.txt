@@ -18,3 +18,6 @@ set_tests_properties(test_reading_Test
                      test_reading_remainder_Test
                      test_reading_continuosly_Test
                      PROPERTIES LABELS "mpi_io_reading")
+
+set_tests_properties(test_writing_Test
+                     PROPERTIES LABELS "mpi_io_writing")

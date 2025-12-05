@@ -16,7 +16,7 @@ int main(int argc, char **argv){
     if (rank == 0)
         printf("Example (PMPI-enabled): Writing %s\n", filename);
 
-    writing_main();
+    mpi_io_writing(filename);
 
     PMPI_Finalize();
     return 0;
