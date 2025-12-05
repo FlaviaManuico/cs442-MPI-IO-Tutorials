@@ -19,7 +19,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 add_subdirectory(src)
 
 if (USE_C)
-    add_library(tutorial_utils STATIC ${src_SOURCES} C/reading_solution.cpp)
+    add_library(tutorial_utils STATIC ${src_SOURCES} C/reading_solution.cpp C/writing_solution.cpp)
     target_link_libraries(tutorial_utils ${MPI_LIBRARIES})
 
     add_executable(create_input C/create_input.cpp)

@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
     // Calculate the process' offset.
     MPI_Offset file_offset;
     
-    file_offset = (MPI_Offset)rank * doubles_per_process * sizeof(double);
+    file_offset = (MPI_Offset)rank * values_per_process * sizeof(double);
 
     /* If you need help debugging or if you are curious you can add the following line:
        printf("Process %d will start writing at byte offset: %lld (0x%llX)\n", 
