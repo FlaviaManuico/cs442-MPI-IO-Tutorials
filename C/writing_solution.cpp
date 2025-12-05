@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
     MPI_File_open(MPI_COMM_WORLD, FILE_NAME, MPI_MODE_CREATE | MPI_MODE_WRONLY, MPI_INFO_NULL, &fh);
 
     // Perform the parallel write operation
-    MPI_File_write_at(fh, file_offset, data_buffer, doubles_per_process, MPI_DOUBLE, MPI_STATUS_IGNORE);
+    MPI_File_write_at(fh, file_offset, data_buffer, values_per_process, MPI_DOUBLE, MPI_STATUS_IGNORE);
 
     // Close the file handle
     MPI_File_close(&fh);
