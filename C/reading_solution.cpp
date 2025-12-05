@@ -82,32 +82,6 @@ void mpi_io_reading(const char *filename){
     free(local_data);
 }
 
-// int tutorial_main(int argc, char **argv){
-//     int rank;
-//     const char *filename = "input.bin";
-
-//     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-
-//     if (argc > 1)
-//         filename = argv[1];
-
-//     if (rank == 0)
-//         printf("MPI I/O Tutorial: Parallel Reading\n\n");
-
-//     double t_start = MPI_Wtime();
-//     mpi_io_reading(filename);
-//     double t_end = MPI_Wtime();
-
-//     double elapsed = t_end - t_start;
-//     double max_elapsed;
-
-//     MPI_Reduce(&elapsed, &max_elapsed, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
-//     if (rank == 0)
-//         printf("\nTime: %f seconds\n", max_elapsed);
-
-//     return 0;
-// }
-
 int tutorial_main(int argc, char **argv){
     int rank;
     const char *filename = "input.bin";
