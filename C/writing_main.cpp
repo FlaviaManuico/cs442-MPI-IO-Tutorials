@@ -5,9 +5,8 @@
 #include <math.h>
 
 #define TOTAL_VALUES 1024
-#define FILE_NAME "output.bin"
 
-int main(int argc, char *argv[]) {
+int writing_main(char *filename) {
     
     MPI_Init(&argc, &argv);
     

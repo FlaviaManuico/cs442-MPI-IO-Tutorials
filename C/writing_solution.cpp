@@ -5,9 +5,8 @@
 #include <math.h>
 
 #define TOTAL_VALUES 1024
-#define FILE_NAME "output.bin"
 
-int main(int argc, char *argv[]) {
+int writing_main(char *filename) {
     
     MPI_Init(&argc, &argv);
     
@@ -52,7 +51,7 @@ int main(int argc, char *argv[]) {
     MPI_File fh;
 
     // Open the file for writing.
-    MPI_File_open(MPI_COMM_WORLD, FILE_NAME, MPI_MODE_CREATE | MPI_MODE_WRONLY, MPI_INFO_NULL, &fh);
+    MPI_File_open(MPI_COMM_WORLD, filename, MPI_MODE_CREATE | MPI_MODE_WRONLY, MPI_INFO_NULL, &fh);
 
     // Perform the parallel write operation
     MPI_File_write_at(fh, file_offset, data_buffer, values_per_process, MPI_DOUBLE, MPI_STATUS_IGNORE);
